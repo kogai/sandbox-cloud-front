@@ -1,0 +1,187 @@
+{
+  "service": {
+    "service": "sandbox-cloud-front",
+    "serviceObject": {
+      "name": "sandbox-cloud-front"
+    },
+    "provider": {
+      "stage": "dev",
+      "region": "us-east-1",
+      "variableSyntax": "\\${([ ~:a-zA-Z0-9._'\",\\-\\/\\(\\)]+?)}",
+      "name": "aws",
+      "versionFunctions": true,
+      "remoteFunctionData": null,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket"
+          },
+          "myDistribution": {
+            "Type": "AWS::CloudFront::Distribution",
+            "Properties": {
+              "DistributionConfig": {
+                "Origins": [
+                  {
+                    "DomainName": "mybucket.s3.amazonaws.com",
+                    "Id": "myS3Origin",
+                    "S3OriginConfig": {
+                      "OriginAccessIdentity": "origin-access-identity/cloudfront/E127EXAMPLE51Z"
+                    }
+                  }
+                ],
+                "Enabled": "true",
+                "Comment": "Some comment",
+                "DefaultRootObject": "index.html",
+                "Logging": {
+                  "IncludeCookies": "false",
+                  "Bucket": "mylogs.s3.amazonaws.com",
+                  "Prefix": "myprefix"
+                },
+                "Aliases": [
+                  "mysite.example.com",
+                  "yoursite.example.com"
+                ],
+                "DefaultCacheBehavior": {
+                  "AllowedMethods": [
+                    "DELETE",
+                    "GET",
+                    "HEAD",
+                    "OPTIONS",
+                    "PATCH",
+                    "POST",
+                    "PUT"
+                  ],
+                  "TargetOriginId": "myS3Origin",
+                  "ForwardedValues": {
+                    "QueryString": "false",
+                    "Cookies": {
+                      "Forward": "none"
+                    }
+                  },
+                  "TrustedSigners": [
+                    "1234567890EX",
+                    "1234567891EX"
+                  ],
+                  "ViewerProtocolPolicy": "allow-all"
+                },
+                "PriceClass": "PriceClass_200",
+                "Restrictions": {
+                  "GeoRestriction": {
+                    "RestrictionType": "whitelist",
+                    "Locations": [
+                      "AQ",
+                      "CV"
+                    ]
+                  }
+                },
+                "ViewerCertificate": {
+                  "CloudFrontDefaultCertificate": "true"
+                }
+              }
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          }
+        }
+      },
+      "coreCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket"
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          }
+        }
+      }
+    },
+    "functions": {},
+    "resources": {
+      "AWSTemplateFormatVersion": "2010-09-09",
+      "Resources": {
+        "myDistribution": {
+          "Type": "AWS::CloudFront::Distribution",
+          "Properties": {
+            "DistributionConfig": {
+              "Origins": [
+                {
+                  "DomainName": "mybucket.s3.amazonaws.com",
+                  "Id": "myS3Origin",
+                  "S3OriginConfig": {
+                    "OriginAccessIdentity": "origin-access-identity/cloudfront/E127EXAMPLE51Z"
+                  }
+                }
+              ],
+              "Enabled": "true",
+              "Comment": "Some comment",
+              "DefaultRootObject": "index.html",
+              "Logging": {
+                "IncludeCookies": "false",
+                "Bucket": "mylogs.s3.amazonaws.com",
+                "Prefix": "myprefix"
+              },
+              "Aliases": [
+                "mysite.example.com",
+                "yoursite.example.com"
+              ],
+              "DefaultCacheBehavior": {
+                "AllowedMethods": [
+                  "DELETE",
+                  "GET",
+                  "HEAD",
+                  "OPTIONS",
+                  "PATCH",
+                  "POST",
+                  "PUT"
+                ],
+                "TargetOriginId": "myS3Origin",
+                "ForwardedValues": {
+                  "QueryString": "false",
+                  "Cookies": {
+                    "Forward": "none"
+                  }
+                },
+                "TrustedSigners": [
+                  "1234567890EX",
+                  "1234567891EX"
+                ],
+                "ViewerProtocolPolicy": "allow-all"
+              },
+              "PriceClass": "PriceClass_200",
+              "Restrictions": {
+                "GeoRestriction": {
+                  "RestrictionType": "whitelist",
+                  "Locations": [
+                    "AQ",
+                    "CV"
+                  ]
+                }
+              },
+              "ViewerCertificate": {
+                "CloudFrontDefaultCertificate": "true"
+              }
+            }
+          }
+        }
+      },
+      "Outputs": {}
+    }
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/sandbox-cloud-front/dev/1529934773960-2018-06-25T13:52:53.960Z",
+    "artifact": ""
+  }
+}
